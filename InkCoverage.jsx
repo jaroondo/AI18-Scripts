@@ -1,5 +1,5 @@
 ﻿/**
-* @@@BUILDINFO@@@ InkCoverage.jsx !Version! Tue Oct 16 2018 10:26:32 GMT+0200
+* @@@BUILDINFO@@@ InkCoverage.jsx !Version! Thu Nov 08 2018 18:17:11 GMT+0100
 */
 //  loading Inks Coverage from XML file and save them to document XMP metadata
 
