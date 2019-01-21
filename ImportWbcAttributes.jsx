@@ -42,16 +42,17 @@ if (myXmlFile.open("r")) {
     myXmlFile.close();
     var myXML = new XML (fileContent);
     default xml namespace = "http://www.CIP4.org/JDFSchema_1_1";
-    var ns = new Namespace ("eg", "http://www.esko-graphics.com/EGschema1_0");
-    $.writeln(myXML.@DescriptiveName);
+    var eg = new Namespace ("http://www.esko-graphics.com/EGschema1_0");
+    $.writeln('DescriptiveName: ' + myXML.@DescriptiveName);
   
-    $.writeln(myXML.Comment.(@Name == "JobDescription"));
-    $.writeln(myXML.Comment.(@Name == "Description"));
+    $.writeln('JobDescription: ' + myXML.Comment.(@Name == "JobDescription"));
+    $.writeln('Description: ' + myXML.Comment.(@Name == "Description"));
         
-    $.writeln(myXML.CustomerInfo.@CustomerID);    
+    $.writeln('CustomerID: ' + myXML.CustomerInfo.@CustomerID);    
     
-    $.writeln(myXML.ResourcePool.Component.@Class);
-    $.writeln(myXML.ResourcePool.ns::SmartNames.SmartName.(@Name=="Product Category").@Value);
+    $.writeln('ResourcePool/Component@Class: ' + myXML.ResourcePool.Component.@Class);
+    //$.writeln(myXML.ResourcePool.eg::SmartNames.SmartName.(@Name=="Product Category").@Value);
+    $.writeln(myXML.ResourcePool.eg::SmartNames);
     
     //$.writeln(myXML.@File);
     //$.writeln(myXML.Inks.elements().length());
