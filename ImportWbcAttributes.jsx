@@ -51,8 +51,10 @@ if (myXmlFile.open("r")) {
     $.writeln('CustomerID: ' + myXML.CustomerInfo.@CustomerID);    
     
     $.writeln('ResourcePool/Component@Class: ' + myXML.ResourcePool.Component.@Class);
-    //$.writeln(myXML.ResourcePool.eg::SmartNames.SmartName.(@Name=="Product Category").@Value);
-    $.writeln(myXML.ResourcePool.eg::SmartNames);
+    $.writeln('ResourcePool/eg:SmartNames@Class: ' + myXML.ResourcePool.eg::SmartNames.@eg::Class);
+    $.writeln('ResourcePool/eg:SmartNames/eg:SmartName[0]@eg:Name: ' + myXML.ResourcePool.eg::SmartNames.eg::SmartName[0].@eg::Name);
+    
+    //$.writeln(myXML.ResourcePool.eg::SmartNames.eg::SmartName.(@eg::Name=="Product Category"));
     
     //$.writeln(myXML.@File);
     //$.writeln(myXML.Inks.elements().length());
