@@ -34,7 +34,16 @@ function unloadXMPLibrary() { // unload the XMPScript library
     };
 };
 
-
+function getSmartNameAttrValueByName(xmlElement, attrName) {
+    var attrValue = "";
+    for(var i = 0; i < xmlElement.length(); i++) {
+        if (attrName == xmlElement[i].@eg::Name) {
+            attrValue = xmlElement[i].@eg::Value;
+            break;
+        };
+    };
+    return attrValue;
+};
 
 if (myXmlFile.open("r")) {
     var fileContent = myXmlFile.read();
@@ -54,7 +63,7 @@ if (myXmlFile.open("r")) {
     $.writeln('ResourcePool/eg:SmartNames@Class: ' + myXML.ResourcePool.eg::SmartNames.@eg::Class);
     $.writeln('ResourcePool/eg:SmartNames/eg:SmartName[0]@eg:Name: ' + myXML.ResourcePool.eg::SmartNames.eg::SmartName[0].@eg::Name);
     
-    //$.writeln(myXML.ResourcePool.eg::SmartNames.eg::SmartName.(@eg::Name=="Product Category"));
+    $.writeln(getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "PROJECT NAME"));
     
     //$.writeln(myXML.@File);
     //$.writeln(myXML.Inks.elements().length());
