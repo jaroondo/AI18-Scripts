@@ -52,68 +52,81 @@ if (myXmlFile.open("r")) {
     var myXML = new XML (fileContent);
     default xml namespace = "http://www.CIP4.org/JDFSchema_1_1";
     var eg = new Namespace ("http://www.esko-graphics.com/EGschema1_0");
+    /*
     $.writeln('DescriptiveName: ' + myXML.@DescriptiveName);
-  
     $.writeln('JobDescription: ' + myXML.Comment.(@Name == "JobDescription"));
     $.writeln('Description: ' + myXML.Comment.(@Name == "Description"));
-        
     $.writeln('CustomerID: ' + myXML.CustomerInfo.@CustomerID);    
-    
     $.writeln('ResourcePool/Component@Class: ' + myXML.ResourcePool.Component.@Class);
     $.writeln('ResourcePool/eg:SmartNames@Class: ' + myXML.ResourcePool.eg::SmartNames.@eg::Class);
     $.writeln('ResourcePool/eg:SmartNames/eg:SmartName[0]@eg:Name: ' + myXML.ResourcePool.eg::SmartNames.eg::SmartName[0].@eg::Name);
-    
-    $.writeln(getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "PROJECT NAME"));
-    
-    //$.writeln(myXML.@File);
-    //$.writeln(myXML.Inks.elements().length());
-    //$.writeln(myXML.Inks.children().length());
-    //$.writeln(myXML.Inks.Ink[0].@Name);
-    //$.writeln(myXML.Inks.Ink[0].CoveragePerc.@Value);
-    /*var inksCount = myXML.Inks.children().length();
-    for (var i = 0; i < inksCount ; i++ ) {
-        $.writeln(myXML.Inks.Ink[i].@Name + "\t" + myXML.Inks.Ink[i].CoveragePerc.@Value + "\t %");
-    };*/
+    */
+        
     if (loadXMPLibrary()) { // read xml packet
         xmpFile = new XMPFile(myAiFile.fsName, XMPConst.UNKNOWN, XMPConst.OPEN_FOR_UPDATE);
         var myXmp = xmpFile.getXMP();
-//~         if(myXmp){
-//~             var xmpInksCount = myXmp.countArrayItems("http://ns.esko-graphics.com/grinfo/1.0/", "inks");
-//~             //$.writeln("Inks Count: " + xmpInksCount);
-//~             if (!myXmp.doesPropertyExist("http://my.prepressSchema.namespace/", "artworkAngle")) { // set default artworkAngle
-//~                     myXmp.setProperty("http://my.prepressSchema.namespace/", "artworkAngle", 0);
-//~             };
-//~             if (!myXmp.doesPropertyExist("http://my.prepressSchema.namespace/", "punchNumAngle")) { // set default punchNumAngle
-//~                     myXmp.setProperty("http://my.prepressSchema.namespace/", "punchNumAngle", 0);
-//~             };
-//~             if (!myXmp.doesPropertyExist("http://my.prepressSchema.namespace/", "punchNumPrint")) { // set default punchNumPrint
-//~                     myXmp.setProperty("http://my.prepressSchema.namespace/", "punchNumPrint", true);
-//~             };
-//~             /*if (!myXmp.doesPropertyExist("http://my.prepressSchema.namespace/", "logoAngle")) { // set default logoAngle
-//~                     myXmp.setProperty("http://my.prepressSchema.namespace/", "logoAngle", 135);
-//~             };
-//~             if (!myXmp.doesPropertyExist("http://my.prepressSchema.namespace/", "logoPrint")) { // set default logoPrint
-//~                     myXmp.setProperty("http://my.prepressSchema.namespace/", "logoPrint", true);
-//~             };*/
-//~             if (!myXmp.doesPropertyExist("http://my.prepressSchema.namespace/", "smartInks")) { // set smartInks
-//~                     myXmp.setProperty("http://my.prepressSchema.namespace/", "smartInks", null, XMPConst.PROP_IS_ARRAY);
-//~                     XMPMeta.registerNamespace ("http://my.prepressSchema.namespace/smartink#", "smartInk");
-//~             };
-//~             for (var i = 1; i <= xmpInksCount ; i++ ) { //  fill in smartInks from XML
-//~                 myXmp.setStructField("http://my.prepressSchema.namespace/", "smartInks[" + i + "]", "http://my.prepressSchema.namespace/smartink#", "name", myXML.Inks.Ink[i - 1].@Name); // meno Prepress XMP <-- XML
-//~                 //myXmp.setStructField("http://my.prepressSchema.namespace/", "smartInks[" + i + "]", "http://my.prepressSchema.namespace/smartink#", "name", myXmp.getProperty("http://ns.esko-graphics.com/grinfo/1.0/", "inks[" + i + "]/egInk:" + "name")); // meno Prepress XMP <-- Esko
-//~                 
-//~                 myXmp.setProperty("http://ns.esko-graphics.com/grinfo/1.0/", "inks[" + i + "]/egInk:" + "frequency", myXML.Inks.Ink[i - 1].CoveragePerc.@Value); // frequency  Esko XMP <-- XML
-//~                 myXmp.setStructField("http://my.prepressSchema.namespace/", "smartInks[" + i + "]", "http://my.prepressSchema.namespace/smartink#", "coverage", myXML.Inks.Ink[i - 1].CoveragePerc.@Value); // coverage Prepress XMP <-- XML 
-//~                 myXmp.setStructField("http://my.prepressSchema.namespace/", "smartInks[" + i + "]", "http://my.prepressSchema.namespace/smartink#", "overprint", "unknown"); // overprint default setting 
-//~                 
-//~                 /*$.writeln(
-//~                     myXmp.getProperty("http://ns.esko-graphics.com/grinfo/1.0/", "inks[" + i + "]/egInk:" + "name") + "\t" +
-//~                     myXmp.getProperty("http://ns.esko-graphics.com/grinfo/1.0/", "inks[" + i + "]/egInk:" + "frequency") + "\t %");*/
-//~             };
-//~         };
-        // put XMP into file
-        //app.activeDocument.save();
+        /*
+        $.writeln(getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "PROJECT NAME"));
+        $.writeln(myXmp.getProperty("http://my.wbcSchema.namespace/", "projectName"));
+        
+        $.writeln(getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "CUSTOMER ID"));
+        $.writeln(myXmp.getProperty("http://my.wbcSchema.namespace/", "customerID"));
+        
+        $.writeln(getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Litography"));
+        $.writeln(myXmp.getProperty("http://my.wbcSchema.namespace/", "projectNumber"));
+        
+        $.writeln(getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "STBMC"));
+        $.writeln(myXmp.getProperty("http://my.wbcSchema.namespace/", "stbCode"));
+        
+        $.writeln(getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Primer FIP MCC")); // No | Clear | White | Gold
+        $.writeln(myXmp.getProperty("http://my.wbcSchema.namespace/", "primer"));
+        
+        $.writeln(getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Finishing FIP"));
+        $.writeln(myXmp.getProperty("http://my.wbcSchema.namespace/", "finishing"));
+        
+        $.writeln(getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Znak Produktowy")); // Yes / No
+        $.writeln(myXmp.getProperty("http://my.wbcSchema.namespace/", "logo"));
+        
+        $.writeln(getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "INTERNAL PLANT CODE"));
+        $.writeln(myXmp.getProperty("http://my.wbcSchema.namespace/", "sapDescription"));
+        */
+        if(myXmp){
+            if (myXmp.doesPropertyExist("http://my.wbcSchema.namespace/", "projectName")) { // set project name
+                    myXmp.setProperty("http://my.wbcSchema.namespace/", "projectName", 
+                    getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "PROJECT NAME"));
+            };
+            if (myXmp.doesPropertyExist("http://my.wbcSchema.namespace/", "customerID")) { // set customer ID
+                    myXmp.setProperty("http://my.wbcSchema.namespace/", "customerID", 
+                    getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "CUSTOMER ID"));
+            };
+            if (myXmp.doesPropertyExist("http://my.wbcSchema.namespace/", "projectNumber")) { // set project number
+                    myXmp.setProperty("http://my.wbcSchema.namespace/", "projectNumber", 
+                    getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Litography"));
+            };
+            if (myXmp.doesPropertyExist("http://my.wbcSchema.namespace/", "stbCode")) { // set STB
+                    myXmp.setProperty("http://my.wbcSchema.namespace/", "stbCode", 
+                    getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "STBMC"));
+            };
+            if (myXmp.doesPropertyExist("http://my.wbcSchema.namespace/", "primer")) { // set primer
+                    myXmp.setProperty("http://my.wbcSchema.namespace/", "primer", 
+                    getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Primer FIP MCC"));
+            };
+            if (myXmp.doesPropertyExist("http://my.wbcSchema.namespace/", "finishing")) { // set finishing
+                    myXmp.setProperty("http://my.wbcSchema.namespace/", "finishing", 
+                    getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Finishing FIP"));
+            };
+            if (myXmp.doesPropertyExist("http://my.wbcSchema.namespace/", "logo")) { // set logo
+                    var logoAngle = "0";
+                    if (getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Znak Produktowy") != "Yes") {
+                        logoAngle = "-0"
+                    };
+                    myXmp.setProperty("http://my.wbcSchema.namespace/", "logo", logoAngle);
+            };
+            if (myXmp.doesPropertyExist("http://my.wbcSchema.namespace/", "sapDescription")) { // set finishing
+                    myXmp.setProperty("http://my.wbcSchema.namespace/", "sapDescription", 
+                    getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "INTERNAL PLANT CODE"));
+            };
+        };
         app.activeDocument.close();
         if (xmpFile.canPutXMP(myXmp)) {
             xmpFile.putXMP(myXmp);
