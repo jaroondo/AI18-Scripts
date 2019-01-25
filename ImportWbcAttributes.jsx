@@ -91,41 +91,18 @@ if (myXmlFile.open("r")) {
         $.writeln(myXmp.getProperty("http://my.wbcSchema.namespace/", "sapDescription"));
         */
         if(myXmp){
-            if (myXmp.doesPropertyExist("http://my.wbcSchema.namespace/", "projectName")) { // set project name
-                    myXmp.setProperty("http://my.wbcSchema.namespace/", "projectName", 
-                    getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "PROJECT NAME"));
-            };
-            if (myXmp.doesPropertyExist("http://my.wbcSchema.namespace/", "customerID")) { // set customer ID
-                    myXmp.setProperty("http://my.wbcSchema.namespace/", "customerID", 
-                    getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "CUSTOMER ID"));
-            };
-            if (myXmp.doesPropertyExist("http://my.wbcSchema.namespace/", "projectNumber")) { // set project number
-                    myXmp.setProperty("http://my.wbcSchema.namespace/", "projectNumber", 
-                    getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Litography"));
-            };
-            if (myXmp.doesPropertyExist("http://my.wbcSchema.namespace/", "stbCode")) { // set STB
-                    myXmp.setProperty("http://my.wbcSchema.namespace/", "stbCode", 
-                    getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "STBMC"));
-            };
-            if (myXmp.doesPropertyExist("http://my.wbcSchema.namespace/", "primer")) { // set primer
-                    myXmp.setProperty("http://my.wbcSchema.namespace/", "primer", 
-                    getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Primer FIP MCC"));
-            };
-            if (myXmp.doesPropertyExist("http://my.wbcSchema.namespace/", "finishing")) { // set finishing
-                    myXmp.setProperty("http://my.wbcSchema.namespace/", "finishing", 
-                    getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Finishing FIP"));
-            };
-            if (myXmp.doesPropertyExist("http://my.wbcSchema.namespace/", "logo")) { // set logo
-                    var logoAngle = "0";
-                    if (getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Znak Produktowy") != "Yes") {
-                        logoAngle = "-0"
-                    };
-                    myXmp.setProperty("http://my.wbcSchema.namespace/", "logo", logoAngle);
-            };
-            if (myXmp.doesPropertyExist("http://my.wbcSchema.namespace/", "sapDescription")) { // set finishing
-                    myXmp.setProperty("http://my.wbcSchema.namespace/", "sapDescription", 
-                    getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "INTERNAL PLANT CODE"));
-            };
+            myXmp.setProperty("http://my.wbcSchema.namespace/", "projectName", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "PROJECT NAME"));
+            myXmp.setProperty("http://my.wbcSchema.namespace/", "customerID", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "CUSTOMER ID"));
+            myXmp.setProperty("http://my.wbcSchema.namespace/", "projectNumber", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Litography"));
+            myXmp.setProperty("http://my.wbcSchema.namespace/", "stbCode", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "STBMC"));
+            myXmp.setProperty("http://my.wbcSchema.namespace/", "primer", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Primer FIP MCC"));
+            myXmp.setProperty("http://my.wbcSchema.namespace/", "finishing", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Finishing FIP"));
+            var logoAngle = "0";
+               if (getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Znak Produktowy") != "Yes") {
+                   logoAngle = "-0"
+               };
+            myXmp.setProperty("http://my.wbcSchema.namespace/", "logo", logoAngle);
+            myXmp.setProperty("http://my.wbcSchema.namespace/", "sapDescription", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "INTERNAL PLANT CODE"));
         };
         app.activeDocument.close();
         if (xmpFile.canPutXMP(myXmp)) {
@@ -138,7 +115,7 @@ if (myXmlFile.open("r")) {
         unloadXMPLibrary();
         app.open(myAiFile);
     };
-    //alert ("WebCenter attributes was uploaded successfully !", "WBC Attributes");
+    alert ("WebCenter attributes was uploaded successfully !", "WBC Attributes");
 } else {
     alert (myXmlFile.name.replace(/%20/g, " ") + "\nin the same location does not exist !", "XML file missing", true);
 };
