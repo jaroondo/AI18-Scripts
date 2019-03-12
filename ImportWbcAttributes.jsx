@@ -91,18 +91,37 @@ if (myXmlFile.open("r")) {
         $.writeln(myXmp.getProperty("http://my.wbcSchema.namespace/", "sapDescription"));
         */
         if(myXmp){
+            // identification
             myXmp.setProperty("http://my.wbcSchema.namespace/", "projectName", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "PROJECT NAME"));
+            myXmp.setProperty("http://my.wbcSchema.namespace/", "customersCode", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "CUSTOMER NO"));
             myXmp.setProperty("http://my.wbcSchema.namespace/", "customerID", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "CUSTOMER ID"));
             myXmp.setProperty("http://my.wbcSchema.namespace/", "projectNumber", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Litography"));
-            myXmp.setProperty("http://my.wbcSchema.namespace/", "stbCode", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "STBMC"));
-            myXmp.setProperty("http://my.wbcSchema.namespace/", "primer", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Primer FIP MCC"));
-            myXmp.setProperty("http://my.wbcSchema.namespace/", "finishing", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Finishing FIP"));
+            // material
+            var stbCode = getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "STBMC");
+            if (stbCode == "") {
+                stbCode = getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "SAP_INDEX_CPMC");
+            };
+            myXmp.setProperty("http://my.wbcSchema.namespace/", "stbCode", stbCode);
+            
+            var baseCoat = getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Primer FIP MCC");
+            if (baseCoat == "") {
+                baseCoat = getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "CPMC_BASE VARNISH");
+            };
+            myXmp.setProperty("http://my.wbcSchema.namespace/", "primer", baseCoat);
+            
+            var coverVarnish = getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Finishing FIP");
+            if (coverVarnish == "") {
+                coverVarnish = getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "CPMC_OVERPRINT VARNISH");
+            }; 
+            myXmp.setProperty("http://my.wbcSchema.namespace/", "finishing", coverVarnish);
+            
             var logoAngle = "0";
                if (getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "Znak Produktowy") != "Yes") {
                    logoAngle = "-0"
                };
             myXmp.setProperty("http://my.wbcSchema.namespace/", "logo", logoAngle);
-            myXmp.setProperty("http://my.wbcSchema.namespace/", "sapDescription", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "INTERNAL PLANT CODE"));
+            myXmp.setProperty("http://my.wbcSchema.namespace/", "internalPlantCode", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "INTERNAL PLANT CODE"));
+            myXmp.setProperty("http://my.wbcSchema.namespace/", "sapDescription", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "SAP_Desctiption"));
         };
         app.activeDocument.close();
         if (xmpFile.canPutXMP(myXmp)) {
