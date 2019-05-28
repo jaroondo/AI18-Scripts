@@ -31,8 +31,9 @@ function flatenArtworks () {
     if (w.show () == 1) {
         for (var i = 0; i < selectedArtworks; i++) {
             app.open(awArray[i]);
-            
-            app.activeDocument.close(); //SaveOptions.SAVECHANGES
+            app.doScript ("Flatten Artwork", "Pre-press", false);
+            app.activeDocument.layers[0].name = "design";
+            app.activeDocument.close(SaveOptions.SAVECHANGES);
         };
         alert("Flatening successfuly done...");
     };
