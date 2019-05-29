@@ -3,6 +3,22 @@
 */
 // flat layers to design layer in selected files
 
+var progWin = createProgressWindow ();
+var message = progWin.children[0];
+var pbar = progWin.children[1];
+
+function createProgressWindow () { 
+    var w = new Window ("palette", "Progress Window...");
+        var message = w.add('statictext {text: "Process State...", characters: 40}');
+        var pbar = w.add ('progressbar', undefined, 0, 100);
+        pbar.preferredSize.width = 300;
+    return w;
+};
+function setProgWinContent (msg, min, max) {
+    message.text = msg;
+    pbar.minvalue = min;
+    pbar.maxvalue = max;
+};
 function flatenArtworks () {
     var awArray = [];
     var selectedArtworks = awArray.length;
@@ -29,11 +45,13 @@ function flatenArtworks () {
             buttonGroup.add ("button", undefined, "Cancel");
     
     if (w.show () == 1) {
+        setProgWinContent ("Flattening artworks...", 0, selectedArtworks);
         for (var i = 0; i < selectedArtworks; i++) {
             app.open(awArray[i]);
             app.doScript ("Flatten Artwork", "Pre-press", false);
             app.activeDocument.layers[0].name = "design";
             app.activeDocument.close(SaveOptions.SAVECHANGES);
+            pbar.value = i; progWin.update();
         };
         alert("Flatening successfuly done...");
     };
