@@ -121,7 +121,7 @@ if (myXmlFile.open("r")) {
                };
             myXmp.setProperty("http://my.wbcSchema.namespace/", "logo", logoAngle);
             myXmp.setProperty("http://my.wbcSchema.namespace/", "internalPlantCode", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "INTERNAL PLANT CODE"));
-            myXmp.setProperty("http://my.wbcSchema.namespace/", "sapDescription", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "SAP_Desctiption"));
+            myXmp.setProperty("http://my.wbcSchema.namespace/", "sapDescription", getSmartNameAttrValueByName (myXML.ResourcePool.eg::SmartNames.eg::SmartName, "SAP_Description")); 
         };
         app.activeDocument.close();
         if (xmpFile.canPutXMP(myXmp)) {
